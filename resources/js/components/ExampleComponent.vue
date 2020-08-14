@@ -1,23 +1,27 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        {{ user }}
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
+        data () {
+            return {
+                user : null
+            }
+        },
+        methods : {
+            async getUser() {
+                let resp = await axios.get('/api/user');
+
+                this.user = resp.data;
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            console.log("here");
+            this.getUser();
         }
     }
 </script>
